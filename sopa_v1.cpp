@@ -73,7 +73,7 @@ int cantidad_palabras(int longitud){
 }//fin conatidad_palabras();
 
 //guarda las palabras introducidas por el usuario.
-void guardar_palabras(int longitud, int palabras, char letra[PMAX][LMAX], int cuenta[9]){
+void guardar_palabras(int longitud, int palabras, char letra[PMAX][LMAX], int cuenta[PMAX]){
 
     for(int n=0; n<palabras; n++){
 	cuenta [n] = 0;//se inicializa la variable cuenta.
@@ -344,9 +344,9 @@ int jugar(char matriz[NMAX][NMAX], char info[NMAX][NMAX], int palabras, char let
 	printf("Palabra: ");
 	scanf(" %s", respuesta);
 	//va comprobando todas las letras de todas las palabras a ver si coincide con la respuesta.
-	for(int y=0; y<palabras; y++){
+	for(int y=0; y<palabras && !palabras_iguales; y++){
 	    letras_ok = 0;
-	    for(int x=0; x<cuenta[y]; x++)
+	    for(int x=0; x<cuenta[y] && !palabras_iguales; x++)
 		if( respuesta[x] == letra[y][x] ){
 		    //se suma letras_ok cada vez que una letra es correcta, se reinicia a 0 por cada palabra incorrecta.
 		    letras_ok += 1;
@@ -369,7 +369,6 @@ int jugar(char matriz[NMAX][NMAX], char info[NMAX][NMAX], int palabras, char let
 
 			}//fin switch info
 			//finaliza el bucle de palabras
-			y = palabras;
 		    }//fin if comparar letras_ok
 		}//fin if comprobar palabras
 	}//fin for y
